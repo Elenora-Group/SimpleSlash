@@ -1,6 +1,6 @@
 {
     "name": "simple-slash",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "A simple Command Builder for Discord.",
     "main": "dist/commonjs/index.js",
     "module": "dist/esm/index.js",
