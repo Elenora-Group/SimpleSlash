@@ -34,7 +34,7 @@
         "discord slash",
         "discord slash command"
     ],
-    "author": "Elenora Group",
+    "author": "Team Hydra - Hiekki",
     "license": "GPL-3.0-or-later",
     "devDependencies": {
         "@types/node": "^20.4.2",
