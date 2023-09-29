@@ -1,16 +1,7 @@
-export enum CommandType {
-    Subcommand = 1,
-    SubcommandGroup,
-    String,
-    Integer,
-    Boolean,
-    User,
-    Channel,
-    Role,
-    Mentionable,
-    Number,
-    Attachment,
-}
+export type Choice<T> = {
+    name: string;
+    value: T;
+};
 
 type BuildArray<T, Size extends number, Tuple extends T[] = []> = Tuple['length'] extends Size
     ? Tuple

@@ -1,18 +1,18 @@
 # About
 
-`@elenoragroup/simple-slash` is a utility package for building the Discord Slash Commands JSON simply.
+`simple-slash` is a utility package for building the Discord Slash Commands JSON simply.
 
 # Installation
 
 **This was built with Node.js v18.12.1.**
 
 ```cmd
-    npm install @elenoragroup/simple-slash
+    npm install simple-slash
 ```
 
 # Links
 
--   [Elenora Support](https://discord.gg/elenora)
+-   [Support](https://discord.gg/elenora)
 -   [Documentation](https://github.com/Elenora-Group/SimpleSlash#readme)
 
 # Examples
@@ -20,7 +20,7 @@
 ## Base Command
 
 ```ts
-    import SimpleSlash from '@elenoragroup/simple-slash';
+    import SimpleSlash from simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('ping', 'Pings the bot.');
@@ -46,7 +46,7 @@
         description: string,
         required = false,
         autocomplete = false,
-        choices?: string[], //Optional; Length must be between 2 and 25.
+        choices?: (string | { name: string, value: string })[], //Optional; Length must be between 1 and 25.
         min_length?: number, //Optional; Min number of characters to be passed in
         max_length?: number, //Optional; Max number of characters to be passed in
     )
@@ -55,7 +55,7 @@
 **Base StringOption**
 
 ```ts
-    import SimpleSlash from '@elenoragroup/simple-slash';
+    import SimpleSlash from 'simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('stats', "Look up someone's stats").StringOption('name', "Who's stats would you like to see?");
@@ -83,11 +83,11 @@
 **StringOption with Choices** - Choices are automatically lowercased and all spaces replaced with `_` for the value.
 
 ```ts
-    import SimpleSlash from '@elenoragroup/simple-slash';
+    import SimpleSlash from 'simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('stats', "Look up someone's stats")
-        .StringOption('name', "Who's stats would you like to see?", true, false, ['Timmy', 'Peter', 'Jimmy John']);
+        .StringOption('name', "Who's stats would you like to see?", true, false, ['Timmy', 'Peter', 'Jimmy John', { name: 'SUSIE', value: 'susie' }]);
 
     // value of definition
     SimpleSlash {
@@ -111,6 +111,10 @@
                 name: 'Jimmy John',
                 value: 'jimmy_john'
             },
+            {
+                name: 'SUSIE',
+                value: 'susie'
+            },
           ],
           required: true,
           autocomplete: false,
@@ -132,16 +136,16 @@
         description: string,
         required = false,
         autocomplete = false,
+        choices?: (number | { name: string, value: number })[], //Optional; Length must be between 1 and 25.
         min_value?: number, //Optional; Min value of the number to be passed in
         max_value?: number, //Optional; Max value of the number to be passed in
-        choices?: number[], //Optional; Length must be between 2 and 25.
     )
 ```
 
 **Base IntegerOption | NumberOption**
 
 ```ts
-    import SimpleSlash from '@elenoragroup/simple-slash';
+    import SimpleSlash from 'simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('puppies', 'See puppies.').IntegerOption('amount', 'How many puppies would you like to see?');
@@ -181,7 +185,7 @@
 **Base ChannelOption**
 
 ```ts
-    import SimpleSlash, { ChannelTypes } from '@elenoragroup/simple-slash';
+    import SimpleSlash, { ChannelTypes } from 'simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('set_channel', 'Set a channel for posts.')
@@ -219,7 +223,7 @@
 **Base BooleanOption | UserOption | RoleOption | MentionableOption | AttachmentOption**
 
 ```ts
-    import SimpleSlash from '@elenoragroup/simple-slash';
+    import SimpleSlash from 'simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('profile', "See someone's profile.").UserOption('user', "Who's profile would you like to see?");
@@ -255,7 +259,7 @@
 **Base Subcommand | SubcommandGroup**
 
 ```ts
-    import SimpleSlash from '@elenoragroup/simple-slash';
+    import SimpleSlash from 'simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('boxes', 'Do things with boxes.').Subcommand('list', 'List all current boxes.')
@@ -279,7 +283,7 @@
 ### Nested Command
 
 ```ts
-import SimpleSlash from '@elenoragroup/simple-slash';
+import SimpleSlash from 'simple-slash';
 
 const definition = new SimpleSlash('purchase', 'Buy things')
     .SubcommandGroup('bottoms', 'Pants, shorts, etc.', (command) =>

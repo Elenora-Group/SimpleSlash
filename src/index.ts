@@ -15,4 +15,18 @@ export enum ChannelType {
     GUILD_FORUM,
 }
 
+export enum CommandType {
+    Subcommand = 1,
+    SubcommandGroup,
+    String,
+    Integer,
+    Boolean,
+    User,
+    Channel,
+    Role,
+    Mentionable,
+    Number,
+    Attachment,
+}
+
 export default SimpleSlash;

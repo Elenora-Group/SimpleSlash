@@ -1,5 +1,5 @@
-import { ChannelType } from '..';
-import { CommandType, OptionsLength } from '../types';
+import { ChannelType, CommandType } from '..';
+import { Choice, OptionsLength } from '../types';
 
 export default class SimpleSlash {
     name: string;
@@ -32,19 +32,21 @@ export default class SimpleSlash {
         description: string,
         required = false,
         autocomplete = false,
-        choices?: OptionsLength<string, 2, 25>,
+        choices?: OptionsLength<string | Choice<string>, 1, 25>,
         min_length?: number,
         max_length?: number,
     ) {
         const choice_options = [];
         if (choices?.length) {
-            if (choices?.length < 2) throw new Error('Choices must be an array of at least 2 strings');
-            if (choices?.length > 25) throw new Error('Choices must be an array of no more than 25 strings');
+            if (choices?.length > 25) throw new Error('Choices must be an array of no more than 25 choices.');
             for (const choice of choices) {
-                choice_options.push({
-                    name: choice,
-                    value: choice.replace(/ /g, '_').toLowerCase(),
-                });
+                if (typeof choice === 'object') choice_options.push(choice);
+                else {
+                    choice_options.push({
+                        name: choice,
+                        value: choice.replace(/ /g, '_').toLowerCase(),
+                    });
+                }
             }
         }
         this.options.push({
@@ -65,19 +67,21 @@ export default class SimpleSlash {
         description: string,
         required = false,
         autocomplete = false,
+        choices?: OptionsLength<number | Choice<number>, 1, 25>,
         min_value?: number,
         max_value?: number,
-        choices?: OptionsLength<number, 2, 25>,
     ) {
         const choice_options = [];
         if (choices?.length) {
-            if (choices?.length < 2) throw new Error('Choices must be an array of at least 2 numbers');
-            if (choices?.length > 25) throw new Error('Choices must be an array of no more than 25 numbers');
+            if (choices?.length > 25) throw new Error('Choices must be an array of no more than 25 choices.');
             for (const choice of choices) {
-                choice_options.push({
-                    name: choice,
-                    value: choice,
-                });
+                if (typeof choice === 'object') choice_options.push(choice);
+                else {
+                    choice_options.push({
+                        name: choice,
+                        value: choice,
+                    });
+                }
             }
         }
         this.options.push({
@@ -86,9 +90,9 @@ export default class SimpleSlash {
             description,
             required,
             autocomplete,
+            choices: choice_options,
             min_value,
             max_value,
-            choices: choice_options,
         });
         return this;
     }
@@ -149,19 +153,21 @@ export default class SimpleSlash {
         description: string,
         required = false,
         autocomplete = false,
+        choices?: OptionsLength<number | Choice<number>, 1, 25>,
         min_value?: number,
         max_value?: number,
-        choices?: OptionsLength<number, 2, 25>,
     ) {
         const choice_options = [];
         if (choices?.length) {
-            if (choices?.length < 2) throw new Error('Choices must be an array of at least 2 numbers');
-            if (choices?.length > 25) throw new Error('Choices must be an array of no more than 25 numbers');
+            if (choices?.length > 25) throw new Error('Choices must be an array of no more than 25 choices.');
             for (const choice of choices) {
-                choice_options.push({
-                    name: choice,
-                    value: choice,
-                });
+                if (typeof choice === 'object') choice_options.push(choice);
+                else {
+                    choice_options.push({
+                        name: choice,
+                        value: choice,
+                    });
+                }
             }
         }
         this.options.push({
@@ -170,9 +176,9 @@ export default class SimpleSlash {
             description,
             required,
             autocomplete,
+            choices: choice_options,
             min_value,
             max_value,
-            choices: choice_options,
         });
         return this;
     }
