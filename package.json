@@ -1,6 +1,6 @@
 {
     "name": "simple-slash",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "A simple Command Builder for Discord.",
     "main": "dist/commonjs/index.js",
     "module": "dist/esm/index.js",
@@ -34,7 +34,7 @@
         "discord slash",
         "discord slash command"
     ],
-    "author": "Elenora Group",
+    "author": "Team Hydra - Hiekki",
     "license": "GPL-3.0-or-later",
     "devDependencies": {
         "@types/node": "^20.4.2",

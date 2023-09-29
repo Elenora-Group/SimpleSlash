@@ -20,7 +20,7 @@
 ## Base Command
 
 ```ts
-    import SimpleSlash from simple-slash';
+    import SimpleSlash from 'simple-slash';
 
     // Create the definition for the command
     const definition = new SimpleSlash('ping', 'Pings the bot.');
